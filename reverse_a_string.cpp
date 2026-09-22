@@ -1,75 +1,80 @@
 class Solution {
 public:
-    void reverseString(vector<char>& s) {
-        int left =0;
-        int right=s.size()-1;
-
-        while(left<right){
-            swap(s[left], s[right]);
-            left++;
-            right--;
+    bool isPalindrome(int x) {
+        if (x < 0) {
+            return false;
         }
+        int temp = x;
+        int lastdigit = 0;
+        long long reverse = 0;
+        while (x > 0) {
+            lastdigit = x % 10;
+            reverse = (reverse * 10) + lastdigit;
+            x = x / 10;
+        }
+        return temp == reverse;
     }
 };
 
 /*
 Dry Run
 
-let array: s = ['c', 'o', 'd', 'e']`
+let number: x = 121
 
 Initially:
 
-`left = 0`
-`right = 3`
+x = 121
+temp = 121
+lastdigit = 0
+reverse = 0
 
-So:
+First check:
+x < 0 → 121 < 0 → false (skip if-block)
 
-* `s[0] = 'c'`
-* `s[3] = 'e'`
+Iteration 1:
 
-Now we check the condition:
+x > 0 → 121 > 0 → true
 
-left<right → 0<3 → true
+So, the loop executes.
 
-So, the loop executes and we swap `s[left]` and `s[right]`.
-
-After swapping:
-
-`s = ['e', 'o', 'd', 'c']`
-
-Then:
-
-`left++` → `left = 1`
-`right--` → `right = 2`
+lastdigit = 121 % 10 → 1
+reverse = (0 * 10) + 1 → 1
+x = 121 / 10 → 12
 
 ---
 
-### Second Iteration
+Iteration 2:
 
 Now:
 
-`left = 1`
-`right = 2`
-
-So:
-
-* `s[1] = 'o'`
-* `s[2] = 'd'`
+x = 12
 
 Check the condition:
 
-`left < right` → `1 < 2` → **true**
+x > 0 → 12 > 0 → true
 
-The loop executes again, and we swap `s[left]` and `s[right]`.
+The loop executes again.
+lastdigit = 12 % 10 → 2
+reverse = (1 * 10) + 2 → 12
+x = 12 / 10 → 1
 
-After swapping:
+---
 
-`s = ['e', 'd', 'o', 'c']`
+Iteration 3:
 
-Then:
+Now:
 
-`left++` → `left = 2`
-`right--` → `right = 1`
+x = 1
+
+Check the condition:
+
+x>0  (1>0) → true
+
+The loop executes again.
+
+lastdigit = 1 % 10 → 1
+reverse = (12 * 10) + 1 = 121
+x = 1 / 10 → 0
 
 ---
 
@@ -77,17 +82,16 @@ Then:
 
 Now:
 
-`left = 2`
-`right = 1`
+x = 0
 
 Check the condition:
 
-`left<right` → `2 < 1` → **false**
+x>0 → (0>0) → false
 
 Therefore, the `while` loop stops, and the code cannot execute another iteration.
 
-Final reversed array:
+Final check for return:
+temp == reverse → 121 == 121 → true
 
-s = ['e', 'd', 'o', 'c']
-
+Returns true
 */
