@@ -12,7 +12,11 @@ for(int j=1; j<n; j++){
 return i+1;
 }
 };
+// the brute fore approach is use set data structure, TC will be O(N log N)
+
+
 /*
+//  Optimal Approach, TC will be O(n)
 iteration 1
 
 j=1
